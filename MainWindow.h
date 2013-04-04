@@ -6,6 +6,7 @@
 class GridWidget;
 class GridData;
 
+class QSignalMapper;
 class QPushButton;
 class QLineEdit;
 
@@ -22,9 +23,10 @@ private slots:
 	
 private:
 	
-	GridWidget* m_gWidget;
 	GridData* m_gData;
+	GridWidget* m_gWidget;
 	
+	QSignalMapper* m_mapper;
 	QPushButton* m_createButton;
 	QLineEdit* m_newWidth;
 	QLineEdit* m_newHeight;
