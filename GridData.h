@@ -11,6 +11,9 @@ public:
 	~GridData();
 
 	void recreate(int width, int height);
+	void saveToFile(QString fileName);
+	void loadFromFile(QString fileName);
+	
 	void setCellData(int x, int y, int pix);
 	int getCellData(int x, int y);
 	
