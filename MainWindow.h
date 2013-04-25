@@ -2,12 +2,12 @@
 #define MAINWINDOW_H
 
 #include <QWidget>
+#include <QDir>
 
 class GridWidget;
 class GridData;
 
 class QSignalMapper;
-class QDir;
 class QStringList;
 class QPushButton;
 class QLineEdit;
@@ -27,18 +27,18 @@ private slots:
 	
 private:
 	
-	QDir* m_texturesDir;
+	QDir m_pixDir;
 	QSignalMapper* m_mapper;
 	QStringList m_pixList;
+	
+	GridData* m_gData;
+	GridWidget* m_gWidget;
 	
 	QPushButton* m_createButton;
 	QPushButton* m_saveButton;
 	QPushButton* m_loadButton;
 	QLineEdit* m_newWidth;
 	QLineEdit* m_newHeight;
-	
-	GridData* m_gData;
-	GridWidget* m_gWidget;
 };
 
 #endif // MAINWINDOW_H

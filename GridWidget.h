@@ -5,13 +5,12 @@
 #include <QStringList>
 
 class GridData;
-class QStringList;
 
 class GridWidget : public QWidget
 {
 	Q_OBJECT
 public:
-	explicit GridWidget(GridData* data, QStringList pixList,
+	explicit GridWidget(GridData* data, QStringList strList,
 						QWidget *parent = 0);
 	
 signals:

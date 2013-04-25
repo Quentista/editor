@@ -7,23 +7,16 @@
 #include <QBrush>
 #include <QPen>
 #include <QColor>
-#include <QStringList>
 #include <QList>
 #include <QPixmap>
 
-GridWidget::GridWidget(GridData* data, QStringList pixList, QWidget *parent) :
+GridWidget::GridWidget(GridData* data, QStringList strList, QWidget *parent) :
 	QWidget(parent)
   , m_gData(data)
   , m_scale(20)
   , m_currentPix(0)
-  , m_pixList(pixList)
 {
-
-//	m_pixList = pixList;
-	
-//	m_pixList <<"./textures_src/default.png" 
-//			 <<"./textures_src/1.png"<< "./textures_src/2.png"
-//			 <<"./textures_src/3.png"<<"./textures_src/4.png";
+	m_pixList.append(strList);
 }
 
 /*virtual*/ void GridWidget::paintEvent(QPaintEvent *evt)
@@ -42,16 +35,8 @@ GridWidget::GridWidget(GridData* data, QStringList pixList, QWidget *parent) :
 		for(int j=0; j<height; ++j)
 		{
 			int PixId = m_gData->getCellData(i,j);
-			
-			if (PixId>=0 && PixId<m_pixList.size())
-			{
-				painter.drawPixmap(i*m_scale, j*m_scale, m_scale, m_scale,
+			painter.drawPixmap(i*m_scale, j*m_scale, m_scale, m_scale,
 							   QPixmap(m_pixList[PixId]));
-			}
-			else
-			{
-				painter.setBrush(QBrush(Qt::NoBrush));
-			}
 			painter.drawRect(QRect(i*m_scale, j*m_scale, m_scale, m_scale));
 		}
 	}

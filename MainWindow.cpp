@@ -5,28 +5,26 @@
 #include <QLineEdit>
 #include <QSignalMapper>
 #include <QFileDialog>
-#include <QDir>
 #include <QStringList>
+#include <QDebug>
 
 #include "GridWidget.h"
 #include "GridData.h"
 
-
 MainWindow::MainWindow(QWidget *parent)
 	: QWidget(parent)
+	, m_pixDir("textures_src")
+	, m_gData(new GridData(10, 10, this))
 	, m_mapper(new QSignalMapper(this))
-	, m_texturesDir(new QDir("./textures_src"))
-	, m_pixList(
-					m_texturesDir->entryList(QDir::Files, QDir::Name))
 	, m_createButton(new QPushButton("create"))
 	, m_saveButton(new QPushButton("Save"))
 	, m_loadButton(new QPushButton("Load"))
 	, m_newWidth(new QLineEdit)
 	, m_newHeight(new QLineEdit)
-	, m_gData(new GridData(10, 10, this))
-	, m_gWidget(new GridWidget(m_gData, m_pixList))
 {
-
+	qDebug()<<m_pixDir.entryList(QDir::Files);
+	m_pixList.append( m_pixDir.entryList(QDir::Files));
+	m_gWidget = new GridWidget(m_gData, m_pixList);
 	
 	this->connect(m_createButton, SIGNAL(clicked()), this, SLOT(createNew()));
 	this->connect(m_mapper, SIGNAL(mapped(int)),
@@ -64,6 +62,22 @@ MainWindow::MainWindow(QWidget *parent)
 		m_mapper->setMapping(button,i);
 		connect(button,SIGNAL(clicked()),m_mapper,SLOT(map()));
 	}
+	
+//	QVBoxLayout* mainLayout = new QVBoxLayout;
+//	mainLayout->setMargin(0);
+//	mainLayout->addWidget(m_gWidget);
+//	mainLayout->addWidget(m_newWidth);
+//	mainLayout->addWidget(m_newHeight);
+//	mainLayout->addWidget(m_createButton);
+//	this->setLayout(mainLayout);
+	
+//	for (int i=0; i<m_pixList.size(); ++i)
+//	{
+//		QPushButton* button = new QPushButton(QString::number(i));
+//		mainLayout->addWidget(button);
+//		m_mapper->setMapping(button,i);
+//		connect(button,SIGNAL(clicked()),m_mapper,SLOT(map()));
+//	}
 }
 
 MainWindow::~MainWindow()
